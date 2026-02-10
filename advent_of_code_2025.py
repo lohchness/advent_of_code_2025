@@ -41,9 +41,13 @@ def day_2(ids: str):
         for i in ranges_list:
             start, end = map(int, i.split("-"))
             for i in range(start, end + 1):
-                if len(str(i)) % 2 == 1: continue
+                # if len(str(i)) % 2 == 1: continue
 
-                if str(i)[0:int(len(str(i))/2)] == str(i)[int(len(str(i))/2)::]:
+                # if str(i)[0:int(len(str(i))/2)] == str(i)[int(len(str(i))/2)::]:
+                #     invalid_sum += i
+
+                # Part 2 - Repeating substring pattern
+                if str(i) in (str(i)+str(i))[1:-1]:
                     invalid_sum += i
         
     return invalid_sum
