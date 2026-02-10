@@ -32,6 +32,22 @@ def day_1(instructions: str):
     
     return times_at_zero
 
+def day_2(ids: str):
+
+    invalid_sum = 0
+
+    with open(ids, "r") as f:
+        ranges_list = f.readline().split(",")
+        for i in ranges_list:
+            start, end = map(int, i.split("-"))
+            for i in range(start, end + 1):
+                if len(str(i)) % 2 == 1: continue
+
+                if str(i)[0:int(len(str(i))/2)] == str(i)[int(len(str(i))/2)::]:
+                    invalid_sum += i
+        
+    return invalid_sum
 
 if __name__ == "__main__":
-    print(day_1(sys.argv[1]))
+    # print(day_1(sys.argv[1]))
+    print(day_2(sys.argv[1]))
