@@ -55,16 +55,30 @@ def day_2(ids: str):
 def day_3(inp: str):
     sum_jolts = 0
 
+    def recursive_joltage(digits: list[int], length: int) -> list[int]:
+        if length == 1:
+            return [max(digits)]
+        
+        best = max(digits[:-(length  - 1)])
+        next_best = digits.index(best)
+        
+        return [best] + recursive_joltage(digits[next_best + 1:], length - 1)
+
+
+
     with open(inp, "r") as f:
         for bank in f.readlines():
             bank = bank.strip()
             nums = [int(i) for i in bank]
-            tenth = max(nums[:-1])
-            tenth_index = nums.index(tenth)
-            unit = max(nums[tenth_index + 1:])
+            
+            sum_jolts += int("".join(map(str, recursive_joltage(nums, 12))))
+            
+            # tenth = max(nums[:-1])
+            # tenth_index = nums.index(tenth)
+            # unit = max(nums[tenth_index + 1:])
 
-            sum_jolts += tenth * 10 + unit
-
+            # sum_jolts += tenth * 10 + unit
+    
     return sum_jolts
 
 if __name__ == "__main__":
