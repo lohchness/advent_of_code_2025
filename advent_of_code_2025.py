@@ -52,6 +52,22 @@ def day_2(ids: str):
         
     return invalid_sum
 
+def day_3(inp: str):
+    sum_jolts = 0
+
+    with open(inp, "r") as f:
+        for bank in f.readlines():
+            bank = bank.strip()
+            nums = [int(i) for i in bank]
+            tenth = max(nums[:-1])
+            tenth_index = nums.index(tenth)
+            unit = max(nums[tenth_index + 1:])
+
+            sum_jolts += tenth * 10 + unit
+
+    return sum_jolts
+
 if __name__ == "__main__":
     # print(day_1(sys.argv[1]))
-    print(day_2(sys.argv[1]))
+    # print(day_2(sys.argv[1]))
+    print(day_3(sys.argv[1]))
